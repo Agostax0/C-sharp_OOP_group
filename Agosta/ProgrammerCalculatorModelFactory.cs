@@ -10,17 +10,17 @@ namespace Agosta
         {
             Dictionary<string, CCBinaryOperator> binaryOperators = new Dictionary<string, CCBinaryOperator>();
             Dictionary<string, CCUnaryOperator> unaryOperators = new Dictionary<string, CCUnaryOperator>();
-            binaryOperators.Add("and", new CCBinaryOperator((x, y) => And(x, y), 3, null));
-            binaryOperators.Add("or", new CCBinaryOperator((x, y) => Or(x, y), 3, null));
-            binaryOperators.Add("xor", new CCBinaryOperator((x, y) => Xor(x, y), 3, null));
-            binaryOperators.Add("nand", new CCBinaryOperator((x, y) => Nand(x, y), 3, null));
-            binaryOperators.Add("nor", new CCBinaryOperator((x, y) => Nor(x, y), 3, null));
-            binaryOperators.Add("shiftL", new CCBinaryOperator((x, y) => ShiftL(x, y), 3, null));
-            binaryOperators.Add("shiftR", new CCBinaryOperator((x, y) => ShiftR(x, y), 3, null));
-            binaryOperators.Add("roR", new CCBinaryOperator((x, y) => RoR(x, y), 3, null));
-            binaryOperators.Add("roL", new CCBinaryOperator((x, y) => RoL(x, y), 3, null));
+            binaryOperators.Add("and", new CCBinaryOperator((x, y) => And(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("or", new CCBinaryOperator((x, y) => Or(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("xor", new CCBinaryOperator((x, y) => Xor(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("nand", new CCBinaryOperator((x, y) => Nand(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("nor", new CCBinaryOperator((x, y) => Nor(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("shiftL", new CCBinaryOperator((x, y) => ShiftL(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("shiftR", new CCBinaryOperator((x, y) => ShiftR(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("roR", new CCBinaryOperator((x, y) => RoR(x, y), 3, CCType.LEFT));
+            binaryOperators.Add("roL", new CCBinaryOperator((x, y) => RoL(x, y), 3, CCType.LEFT));
 
-            unaryOperators.Add("not", new CCUnaryOperator((x) => Not(x), 4, null));
+            unaryOperators.Add("not", new CCUnaryOperator((x) => Not(x), 4, CCType.LEFT));
             return new CalculatorModelTemplate(binaryOperators,unaryOperators);
         }
 

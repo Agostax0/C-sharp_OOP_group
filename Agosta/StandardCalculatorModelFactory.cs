@@ -10,14 +10,14 @@ namespace Agosta
         {
             Dictionary<string, CCBinaryOperator> binaryOperators = new Dictionary<string, CCBinaryOperator>();
             Dictionary<string, CCUnaryOperator> unaryOperators = new Dictionary<string, CCUnaryOperator>();
-            binaryOperators.Add("sum", new CCBinaryOperator((x, y) => sum(x, y), 1, null));
-            binaryOperators.Add("sub", new CCBinaryOperator((x,y)=> sub(x,y), 1, null));
-            binaryOperators.Add("mult", new CCBinaryOperator((x,y)=> mult(x,y), 2, null));
-            binaryOperators.Add("div", new CCBinaryOperator((x, y) => div(x, y), 3, null));
+            binaryOperators.Add("sum", new CCBinaryOperator((x, y) => sum(x, y), 1, CCType.LEFT));
+            binaryOperators.Add("sub", new CCBinaryOperator((x,y)=> sub(x,y), 1, CCType.LEFT));
+            binaryOperators.Add("mult", new CCBinaryOperator((x,y)=> mult(x,y), 2, CCType.LEFT));
+            binaryOperators.Add("div", new CCBinaryOperator((x, y) => div(x, y), 3, CCType.LEFT));
 
-            unaryOperators.Add("root", new CCUnaryOperator((x) => root(x), 4, null));
-            unaryOperators.Add("inverse", new CCUnaryOperator((x) => inverse(x), 4, null));
-            unaryOperators.Add("square", new CCUnaryOperator((x) => square(x), 4, null));
+            unaryOperators.Add("root", new CCUnaryOperator((x) => root(x), 4, CCType.LEFT));
+            unaryOperators.Add("inverse", new CCUnaryOperator((x) => inverse(x), 4, CCType.LEFT));
+            unaryOperators.Add("square", new CCUnaryOperator((x) => square(x), 4, CCType.LEFT));
             return new CalculatorModelTemplate(binaryOperators, unaryOperators);
         }
 
