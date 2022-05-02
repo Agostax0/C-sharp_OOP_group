@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using static OOP21_Calculator.Lepore.CCType;
 using static OOP21_Calculator.Lepore.IEngineModel;
 
@@ -8,6 +9,7 @@ namespace OOP21_Calculator.Lepore
     public class CCEngine : IEngine
     {
         private readonly Calculator calc;
+        private readonly IFormatProvider fp = CultureInfo.CreateSpecificCulture("en-GB");
         public CCEngine(Calculator c)
         {
             calc = c;
@@ -83,7 +85,7 @@ namespace OOP21_Calculator.Lepore
                 if (IsNumber(token))
                 {
                     double result;
-                    Double.TryParse(token, out result);
+                    Double.TryParse(token, NumberStyles.Any, fp, out result);
                     stack.Push(result);
                 }
                 else if (IsBinaryOperator(token))
@@ -113,7 +115,7 @@ namespace OOP21_Calculator.Lepore
 
             foreach(string s in input)
             {
-                if (IsNumber(s) || s == ",")
+                if (IsNumber(s) || s == ".")
                     currentNumber.Add(s);
                 else
                 {
@@ -121,7 +123,7 @@ namespace OOP21_Calculator.Lepore
                     {
                         double actual = Convert(currentNumber);
                         currentNumber.Clear();
-                        unified.Add(actual.ToString());
+                        unified.Add(actual.ToString(fp));
                     }
                     unified.Add(s);
                 }
@@ -131,7 +133,7 @@ namespace OOP21_Calculator.Lepore
             {
                 double actual = Convert(currentNumber);
                 currentNumber.Clear();
-                unified.Add(actual.ToString());
+                unified.Add(actual.ToString(fp));
             }
 
             Logger.log("Unified", unified);
@@ -150,8 +152,8 @@ namespace OOP21_Calculator.Lepore
             }
 
             double value;
-            double.TryParse(num, out value);
-            Logger.log("Converted", value.ToString());
+            double.TryParse(num, NumberStyles.Any, fp, out value);
+            Logger.log("Converted", value.ToString(fp));
             return value;
         }
 

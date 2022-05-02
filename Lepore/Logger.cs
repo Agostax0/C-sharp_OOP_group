@@ -5,7 +5,7 @@ namespace OOP21_Calculator.Lepore
 {
     class Logger
     {
-        private static readonly bool on = false;
+        private static readonly bool on = true;
 
         public static void log(IList<string> list)
         {

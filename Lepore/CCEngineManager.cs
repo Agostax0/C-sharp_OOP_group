@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
@@ -30,7 +31,7 @@ namespace OOP21_Calculator.Lepore
 
             IEngine engine = new CCEngine(Mounted.Value);
             double result = engine.Calculate(input);
-            memoryManager.State = new List<string> { result.ToString() };
+            memoryManager.State = new List<string> { result.ToString(CultureInfo.CreateSpecificCulture("en-GB")) };
         }
     }
 }

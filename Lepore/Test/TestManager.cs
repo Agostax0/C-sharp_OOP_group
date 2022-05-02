@@ -26,14 +26,14 @@ namespace OOP21_Calculator.Lepore.Test
             IManager mng = new CCManager();
             mng.Engine.Mounted = STANDARD;
 
-            mng.Memory.ReadAll(new List<string>() { "1,1", "+", "2,1" });
+            mng.Memory.ReadAll(new List<string>() { "1.1", "+", "2.1" });
             mng.Engine.Calculate();
-            Assert.AreEqual("3,2", mng.Memory.State[0]);
+            Assert.AreEqual("3.2", mng.Memory.State[0]);
             mng.Memory.Clear();
 
-            mng.Memory.ReadAll(new List<string>() { "1,13", "+", "2,14" });
+            mng.Memory.ReadAll(new List<string>() { "1", ".", "2", "+", "2", ".", "3" });
             mng.Engine.Calculate();
-            Assert.AreEqual("3,27", mng.Memory.State[0]);
+            Assert.AreEqual("3.5", mng.Memory.State[0]);
             mng.Memory.Clear();
 
         }
@@ -53,7 +53,7 @@ namespace OOP21_Calculator.Lepore.Test
             }
 
             mng.Engine.Calculate();
-            Assert.AreEqual("1,6969634100068882", mng.Memory.State[0]);
+            Assert.AreEqual("1.6969634100068882", mng.Memory.State[0]);
             mng.Memory.Clear();   
         }
 
