@@ -1,6 +1,6 @@
 ﻿namespace OOP21_Calculator.Lepore
 {
-    class CCManager : IManager
+    public class CCManager : IManager
     {
 
         private readonly IMemoryManager memManager;
