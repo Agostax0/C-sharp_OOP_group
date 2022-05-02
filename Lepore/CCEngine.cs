@@ -8,9 +8,9 @@ namespace OOP21_Calculator.Lepore
 {
     public class CCEngine : IEngine
     {
-        private readonly Calculator calc;
+        private readonly ICalculatorController calc;
         private readonly IFormatProvider fp = CultureInfo.CreateSpecificCulture("en-GB");
-        public CCEngine(Calculator c)
+        public CCEngine(ICalculatorController c)
         {
             calc = c;
         }
@@ -159,45 +159,12 @@ namespace OOP21_Calculator.Lepore
 
         private double ApplyUnaryOperator(string token, double operand)
         {
-            double result = 0.0;
-            switch (calc)
-            {
-                case Calculator.STANDARD:
-                    {
-                        var controller = new StandardController();
-                        result = controller.ApplyUnaryOperator(token, operand);
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        var controller = new StandardController();
-                        result = controller.ApplyUnaryOperator(token, operand);
-                        break;
-                    }
-            }
-            return result;
+            return calc.ApplyUnaryOperator(token, operand);
         }
 
         private double ApplyBinaryOperator(string token, double firstOperand, double secondOperand)
         {
-            double result = 0.0;
-            switch(calc)
-            {
-                case Calculator.STANDARD:
-                    {
-                        var controller = new StandardController();
-                        result = controller.ApplyBinaryOperator(token, firstOperand, secondOperand);
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        var controller = new StandardController();
-                        result = controller.ApplyBinaryOperator(token, firstOperand, secondOperand);
-                        break;
-                    }
-            }
-            return result;
-            
+            return calc.ApplyBinaryOperator(token, firstOperand, secondOperand);
         }
 
         private bool IsNumber(string s)
@@ -207,87 +174,25 @@ namespace OOP21_Calculator.Lepore
         }
         private bool IsUnaryOperator (string s)
         {
-            bool result = false;
-            switch (calc)
-            {
-                case Calculator.STANDARD:
-                    {
-                        var controller = new StandardController();
-                        result = controller.IsUnaryOperator(s);
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        var controller = new StandardController();
-                        result = controller.IsUnaryOperator(s);
-                        break;
-                    }
-            }
-            return result;
+            return calc.IsUnaryOperator(s);
         }
 
         private bool IsBinaryOperator(string s)
         {
 
-            bool result = false;
-            switch (calc)
-            {
-                case Calculator.STANDARD:
-                    {
-                        var controller = new StandardController();
-                        result = controller.IsBinaryOperator(s);
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        var controller = new StandardController();
-                        result = controller.IsBinaryOperator(s);
-                        break;
-                    }
-            }
-            return result;
+            return calc.IsBinaryOperator(s);
         }
 
         private CCType Type(string s)
         {
-            CCType result = default(CCType);
-            switch (calc)
-            {
-                case Calculator.STANDARD:
-                    {
-                        var controller = new StandardController();
-                        result = controller.GetType(s);
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        var controller = new StandardController();
-                        result = controller.GetType(s);
-                        break;
-                    }
-            }
-            return result;
+            return calc.GetType(s);
         }
 
         private int Precedence(string s)
         {
-            int result = 0;
-            switch (calc)
-            {
-                case Calculator.STANDARD:
-                    {
-                        var controller = new StandardController();
-                        result = controller.GetPrecedence(s);
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        var controller = new StandardController();
-                        result = controller.GetPrecedence(s);
-                        break;
-                    }
-            }
-            return result;
+            return calc.GetPrecedence(s);
         }
+    
+
     }
 }

@@ -1,13 +1,10 @@
-﻿using NUnit.Framework.Constraints;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using static OOP21_Calculator.Lepore.CCType;
 
-namespace OOP21_Calculator.Lepore {
-
-
-    class StandardController : ICalculatorController
+namespace OOP21_Calculator.Lepore
+{
+    public class ScientificController : ICalculatorController
     {
         private readonly IDictionary<string, (int, CCType)> binaryOperators = new Dictionary<string, (int, CCType)>()
         {
@@ -19,7 +16,9 @@ namespace OOP21_Calculator.Lepore {
         };
         private readonly IDictionary<string, (int, CCType)> unaryOperators = new Dictionary<string, (int, CCType)>()
         {
-            {"sqrt", (4, RIGHT) },
+            {"sqrt", (4, LEFT) },
+            {"sin", (4, LEFT) },
+            {"cos", (4, LEFT) },
         };
         public double ApplyBinaryOperator(string op, double a, double b)
         {
@@ -56,6 +55,14 @@ namespace OOP21_Calculator.Lepore {
                 case "sqrt":
                     {
                         return Math.Sqrt(a);
+                    }
+                case "sin":
+                    {
+                        return Math.Sin(a);
+                    }
+                case "cos":
+                    {
+                        return Math.Cos(a);
                     }
                 default: return 0;
             }

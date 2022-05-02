@@ -85,5 +85,35 @@ namespace OOP21_Calculator.Lepore.Test
             mng.Memory.Clear();
         }
 
+        [Test]
+        public void TestScientific()
+        {
+            IList<string> input = new List<string>()
+            {
+                "sin",
+                "(",
+                "3",
+                "/",
+                "5",
+                ")",
+                "+",
+                "cos",
+                "(",
+                "0",
+                ".",
+                "5",
+                ")"
+            };
+
+            IManager mng = new CCManager();
+            mng.Engine.Mounted = SCIENTIFIC;
+
+            mng.Memory.ReadAll(input);
+            mng.Engine.Calculate();
+            Assert.AreEqual("1.442225035285408", mng.Memory.State[0]);
+            mng.Memory.Clear();
+
+        }
+
     }
 }

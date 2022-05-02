@@ -29,9 +29,28 @@ namespace OOP21_Calculator.Lepore
             IList<string> input = memoryManager.State;
             Logger.log("Calculating", input);
 
-            IEngine engine = new CCEngine(Mounted.Value);
+            IEngine engine = new CCEngine(GetController(Mounted.Value));
             double result = engine.Calculate(input);
             memoryManager.State = new List<string> { result.ToString(CultureInfo.CreateSpecificCulture("en-GB")) };
+        }
+
+        private ICalculatorController GetController(Calculator c)
+        {
+            ICalculatorController controller = new StandardController();
+            switch(c)
+            {
+                case Calculator.STANDARD:
+                    {
+                        controller = new StandardController();
+                        break;
+                    }
+                case Calculator.SCIENTIFIC:
+                    {
+                        controller = new ScientificController();
+                        break;
+                    }
+            }
+            return controller;
         }
     }
 }
