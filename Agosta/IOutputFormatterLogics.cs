@@ -1,5 +1,5 @@
 ﻿
-namespace Agosta
+namespace OOP21_Calculator.Agosta
 {
     internal interface IOutputFormatterLogics
     {

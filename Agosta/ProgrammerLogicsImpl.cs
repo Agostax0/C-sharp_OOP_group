@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using static OOP21_Calculator.Lepore.CCEngineManager;
 
-namespace Agosta
+namespace OOP21_Calculator.Agosta
 {
     internal class ProgrammerLogicsImpl : IInputFormatterLogics, IOutputFormatterLogics
     {
         private readonly List<string> _tokens;
         private readonly List<string> buffer;
         private string lastNumBuffer;
-        private readonly CalculatorController _controller;
-        private readonly CCDisplay _display;
+        //private readonly CalculatorController _controller;
+        //private readonly CCDisplay _display;
         private int conversionBase = 10;
-        public ProgrammerLogicsImpl(CCDisplay display)
+        public ProgrammerLogicsImpl(/*CCDisplay display*/)
         {
-            this._display = display;
+            //this._display = display;
             this._tokens = new List<string>();
             this.buffer = new List<string>();
             //_controller = Calculator.PROGRAMMER.getController();
@@ -139,7 +139,7 @@ namespace Agosta
                 BaseMap.Add(8, "₈");
                 BaseMap.Add(10, "₁₀");
                 BaseMap.Add(16, "₁₆");
-                string text = before + " = " + this.Format();
+                string text = before + " = " + this.Format() + BaseMap.GetValueOrDefault(this.conversionBase);
                 //this._controller.getManager().memory().addResult(text);
                 
             }
