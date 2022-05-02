@@ -5,8 +5,8 @@ namespace OOP21_Calculator.Alni
     public class CCBinaryOperator
     {
         private readonly Func<double, double, double> _op;
-        private int Prec { get; }
-        private CCType Op_Type { get; }
+        public int Prec { get; }
+        public CCType Op_Type { get; }
 
         public CCBinaryOperator(Func<double, double, double> op, int prec, CCType type)
         {

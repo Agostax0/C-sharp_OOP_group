@@ -1,8 +1,9 @@
-﻿using OOP21_Calculator.Alni;
+﻿
+using OOP21_Calculator.Alni;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace Agosta
+namespace OOP21_Calculator.Agosta
 {
     static class ProgrammerCalculatorModelFactory
     {
@@ -61,14 +62,22 @@ namespace Agosta
             }
             return ConversionAlgorithms.ToSignedDecimal(sign + ret, 2);
         }
-
+        private static int rollingCheck( long length,  double n)
+        {
+            if (length < (long)n)
+            {
+                return (int)(n % 8);
+            }
+            return (int)(n);
+        }
         private static double RoR(double n1, double n2)
         {
             string conv = ConversionAlgorithms.ToBase((long)n1, 2);
             string addedZero = AddLeadingZerosToByte(conv);
             string sign = Char.ToString(conv.ElementAt(0));
             string ret = addedZero.Substring(1);
-            ret = ret.Substring(ret.Length - (int)n2) + ret.Substring(0, ret.Length - (int)n2);
+            int rollOf = rollingCheck(ret.Length, n2);
+            ret = ret.Substring(ret.Length - rollOf) + ret.Substring(0, ret.Length - rollOf);
             return ConversionAlgorithms.ToSignedDecimal(sign + ret, 2);
         }
         private static double RoL(double n1, double n2)
@@ -77,7 +86,8 @@ namespace Agosta
             string addedZero = AddLeadingZerosToByte(conv);
             string sign = Char.ToString(conv.ElementAt(0));
             string ret = addedZero.Substring(1);
-            ret = ret.Substring((int)n2) + ret.Substring(0, (int)n2);
+            int rollOf = rollingCheck(ret.Length, n2);
+            ret = ret.Substring(rollOf) + ret.Substring(0,rollOf);
             return ConversionAlgorithms.ToSignedDecimal(sign + ret, 2);
         }
 

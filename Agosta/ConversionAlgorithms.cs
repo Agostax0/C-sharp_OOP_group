@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Agosta
+namespace OOP21_Calculator.Agosta
 {
     static class ConversionAlgorithms
     {

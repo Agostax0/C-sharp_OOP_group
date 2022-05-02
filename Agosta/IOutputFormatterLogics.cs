@@ -1,5 +1,5 @@
 ﻿
-namespace Agosta
+namespace OOP21_Calculator.Agosta
 {
     internal interface IOutputFormatterLogics
     {
@@ -9,7 +9,7 @@ namespace Agosta
 
         string Format();
 
-        bool CheckForError(string input)
+        virtual bool CheckForError(string input)
         {
             return  "Syntax error".Equals(input) ||
                     "Parenthesis mismatch".Equals(input);

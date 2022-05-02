@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Agosta
+namespace OOP21_Calculator.Agosta
 {
     static class StandardCalculatorModelFactory
     {
