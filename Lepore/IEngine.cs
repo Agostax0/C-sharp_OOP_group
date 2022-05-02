@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OOP21_Calculator.Lepore
 {
-    interface IEngine
+    public interface IEngine
     {
         double Calculate(IList<string> input);
 

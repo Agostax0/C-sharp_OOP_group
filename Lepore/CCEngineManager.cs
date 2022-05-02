@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
 {
-    class CCEngineManager : IEngineManager
+    public class CCEngineManager : IEngineManager
     {
         private readonly IMemoryManager memoryManager;
-        private Calculator? mountedCalc;
-
-        public enum Calculator
-        {
-            STANDARD, SCIENTIFIC
-        }
+        private readonly IEngineModel model;
 
         public CCEngineManager(IMemoryManager memory)
         {
             memoryManager = memory;
-            mountedCalc = null;
+            model = new CCEngineModel();
         }
 
         public Calculator? Mounted { 
-            get => mountedCalc; 
+            get => model.Mounted; 
             set {
                 Logger.log("Mount", value.ToString());
-                mountedCalc = value; 
+                model.Mounted = value.Value; 
             }
         }
 

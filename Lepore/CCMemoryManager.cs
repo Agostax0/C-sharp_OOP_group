@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OOP21_Calculator.Lepore
 {
-    class CCMemoryManager : IMemoryManager
+    public class CCMemoryManager : IMemoryManager
     {
         private readonly IList<string> buffer;
         private readonly IList<string> history;

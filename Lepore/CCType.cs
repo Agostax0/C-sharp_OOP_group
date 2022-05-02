@@ -1,6 +1,6 @@
 ﻿namespace OOP21_Calculator.Lepore
 {
-    enum Type
+    public enum CCType
     {
         LEFT, RIGHT
     }

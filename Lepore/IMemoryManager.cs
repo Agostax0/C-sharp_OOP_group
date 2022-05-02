@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OOP21_Calculator.Lepore
 {
-    interface IMemoryManager
+    public interface IMemoryManager
     {
         IList<string> State { get; set; }
 

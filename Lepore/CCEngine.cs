@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using static OOP21_Calculator.Lepore.CCEngineManager;
-using static OOP21_Calculator.Lepore.Type;
-
+using static OOP21_Calculator.Lepore.CCType;
+using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
 {
-    class CCEngine : IEngine
+    public class CCEngine : IEngine
     {
         private readonly Calculator calc;
         public CCEngine(Calculator c)
@@ -158,34 +157,45 @@ namespace OOP21_Calculator.Lepore
 
         private double ApplyUnaryOperator(string token, double operand)
         {
-            switch (token)
+            double result = 0.0;
+            switch (calc)
             {
-                case "sin":
+                case Calculator.STANDARD:
                     {
-                        return Math.Sin(operand);
+                        var controller = new StandardController();
+                        result = controller.ApplyUnaryOperator(token, operand);
+                        break;
                     }
-                case "cos":
+                case Calculator.SCIENTIFIC:
                     {
-                        return Math.Cos(operand);
+                        var controller = new StandardController();
+                        result = controller.ApplyUnaryOperator(token, operand);
+                        break;
                     }
-                default: return 0;
             }
+            return result;
         }
 
         private double ApplyBinaryOperator(string token, double firstOperand, double secondOperand)
         {
-            switch(token)
+            double result = 0.0;
+            switch(calc)
             {
-                case "+":
+                case Calculator.STANDARD:
                     {
-                        return firstOperand + secondOperand;
+                        var controller = new StandardController();
+                        result = controller.ApplyBinaryOperator(token, firstOperand, secondOperand);
+                        break;
                     }
-                case "-":
+                case Calculator.SCIENTIFIC:
                     {
-                        return firstOperand - secondOperand;
+                        var controller = new StandardController();
+                        result = controller.ApplyBinaryOperator(token, firstOperand, secondOperand);
+                        break;
                     }
-                default: return 0;
             }
+            return result;
+            
         }
 
         private bool IsNumber(string s)
@@ -195,47 +205,87 @@ namespace OOP21_Calculator.Lepore
         }
         private bool IsUnaryOperator (string s)
         {
-            return new List<string> {
-                "sin",
-                "cos"
-            }.Contains(s);
+            bool result = false;
+            switch (calc)
+            {
+                case Calculator.STANDARD:
+                    {
+                        var controller = new StandardController();
+                        result = controller.IsUnaryOperator(s);
+                        break;
+                    }
+                case Calculator.SCIENTIFIC:
+                    {
+                        var controller = new StandardController();
+                        result = controller.IsUnaryOperator(s);
+                        break;
+                    }
+            }
+            return result;
         }
 
         private bool IsBinaryOperator(string s)
         {
-            return new List<string> {
-                "+",
-                "-",
-                "*",
-                "^",
-                "/"
-            }.Contains(s);
+
+            bool result = false;
+            switch (calc)
+            {
+                case Calculator.STANDARD:
+                    {
+                        var controller = new StandardController();
+                        result = controller.IsBinaryOperator(s);
+                        break;
+                    }
+                case Calculator.SCIENTIFIC:
+                    {
+                        var controller = new StandardController();
+                        result = controller.IsBinaryOperator(s);
+                        break;
+                    }
+            }
+            return result;
         }
 
-        private Type Type(string s)
+        private CCType Type(string s)
         {
-            if (s == "^") return RIGHT;
-            else return LEFT;
+            CCType result = default(CCType);
+            switch (calc)
+            {
+                case Calculator.STANDARD:
+                    {
+                        var controller = new StandardController();
+                        result = controller.GetType(s);
+                        break;
+                    }
+                case Calculator.SCIENTIFIC:
+                    {
+                        var controller = new StandardController();
+                        result = controller.GetType(s);
+                        break;
+                    }
+            }
+            return result;
         }
 
         private int Precedence(string s)
         {
-            IDictionary<string, int> prec = new Dictionary<string, int>()
+            int result = 0;
+            switch (calc)
             {
-                {"+", 1 },
-                {"-", 1 },
-                {"*", 2 },
-                {"/", 2 },
-                {"^", 3 },
-                {"sin", 4 },
-                {"cos", 4 },
-            };
-
-            int result;
-            if (prec.TryGetValue(s, out result))
-                return result;
-            else
-                return -1;
+                case Calculator.STANDARD:
+                    {
+                        var controller = new StandardController();
+                        result = controller.GetPrecedence(s);
+                        break;
+                    }
+                case Calculator.SCIENTIFIC:
+                    {
+                        var controller = new StandardController();
+                        result = controller.GetPrecedence(s);
+                        break;
+                    }
+            }
+            return result;
         }
     }
 }
