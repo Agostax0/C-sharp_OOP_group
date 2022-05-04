@@ -3,9 +3,14 @@ using System;
 
 namespace OOP21_Calculator.Alni
 {
+    /// <summary>
+    /// Static Factory that creates the maps with the Combinatorics Operations and puts them in a CalculatorModel.
+    /// </summary>
     public class CombinatoricsCalculatorModelFactory
     {
         private CombinatoricsCalculatorModelFactory() { }
+
+        /// <returns>a CalculatorModel that has two maps containing all the operators of this calculator</returns>
         public static ICalculatorModel Create()
         {
             Dictionary<string, CCBinaryOperator> binMap = new Dictionary<string, CCBinaryOperator>

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace OOP21_Calculator.Alni
 {
+    /// <summary>
+    /// Implementation of the generic Controller. It is used with Standard, Scientific, Programmer and Combinatorics models.
+    /// </summary>
     public class CalculatorControllerTemplate : ICalculatorController
     {
         private readonly ICalculatorModel _model;
