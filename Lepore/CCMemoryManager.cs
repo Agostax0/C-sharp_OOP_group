@@ -3,36 +3,38 @@ using System.Collections.Generic;
 
 namespace OOP21_Calculator.Lepore
 {
+    /// <summary>
+    /// Memory Manager of the system.
+    /// It provides methods for manipulating the input buffer and retrieving the result of a calculation.
+    /// </summary>
     public class CCMemoryManager : IMemoryManager
     {
-        private readonly IList<string> buffer;
-        private readonly IList<string> history;
+        private readonly IMemoryModel _model = new CCMemoryModel();
 
         public CCMemoryManager()
         {
-            buffer = new List<string>();
-            history = new List<string>();
         }
 
-        public IList<string> State { get => buffer; set { buffer.Clear(); ReadAll(value); } }
+        public IList<string> State { get => _model.State; set { _model.ClearBuffer(); ReadAll(value); } }
+
+        public IList<string> History => _model.History;
 
         public void Read(string s)
         {
-            Logger.log("Reading", s);
-            buffer.Add(s);
+            _model.AddInput(s);
         }
 
         public void ReadAll(IList<string> list)
         {
-            foreach(string s in list)
+            foreach (string s in list)
             {
                 Read(s);
             }
         }
 
-        public void Clear()
-        {
-            buffer.Clear();
-        }
+        public void Clear() => _model.ClearBuffer();
+
+        public void AddResult(string s) => _model.AddToHistory(s);
+        
     }
 }

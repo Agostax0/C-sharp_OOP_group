@@ -4,94 +4,61 @@ using static OOP21_Calculator.Lepore.CCType;
 
 namespace OOP21_Calculator.Lepore
 {
+    
+    /// <summary>
+    /// Class used to simulate the interaction with the scientific calculator controller.
+    /// This class wasn't implemented by me in the original project.
+    /// </summary>
     public class ScientificController : ICalculatorController
     {
-        private readonly IDictionary<string, (int, CCType)> binaryOperators = new Dictionary<string, (int, CCType)>()
+        private readonly IDictionary<string, (Func<double, double, double>, int, CCType)> _binaryOperators = new Dictionary<string, (Func<double, double, double>, int, CCType)>()
         {
-            {"+", (1, LEFT) },
-            {"-", (1, LEFT) },
-            {"*", (2, LEFT) },
-            {"/", (2, LEFT) },
-            {"^", (3, RIGHT) },
+            {"+", ((a,b) => a+b, 1, LEFT )},
+            {"-", ((a,b) => a-b, 1, LEFT )},
+            {"*", ((a,b) => a*b, 2, LEFT )},
+            {"/", ((a,b) => a/b, 2, LEFT )},
+            {"^", ((a,b) => Math.Pow(a,b), 3, RIGHT )},
         };
-        private readonly IDictionary<string, (int, CCType)> unaryOperators = new Dictionary<string, (int, CCType)>()
+        private readonly IDictionary<string, (Func<double, double>, int, CCType)> _unaryOperators = new Dictionary<string, (Func<double, double>, int, CCType)>()
         {
-            {"sqrt", (4, LEFT) },
-            {"sin", (4, LEFT) },
-            {"cos", (4, LEFT) },
+            {"sqrt", ((a) => Math.Sqrt(a), 4, LEFT )},
+            {"sin", ((a) => Math.Sin(a), 4, LEFT )},
+            {"cos", ((a) => Math.Cos(a), 4, LEFT )},
+
         };
         public double ApplyBinaryOperator(string op, double a, double b)
         {
-            switch (op)
-            {
-                case "+":
-                    {
-                        return a + b;
-                    }
-                case "-":
-                    {
-                        return a - b;
-                    }
-                case "*":
-                    {
-                        return a * b;
-                    }
-                case "/":
-                    {
-                        return a / b;
-                    }
-                case "^":
-                    {
-                        return Math.Pow(a, b);
-                    }
-                default: return 0;
-            }
+            _binaryOperators.TryGetValue(op, out var val);
+            return val.Item1.Invoke(a, b);
         }
 
         public double ApplyUnaryOperator(string op, double a)
         {
-            switch (op)
-            {
-                case "sqrt":
-                    {
-                        return Math.Sqrt(a);
-                    }
-                case "sin":
-                    {
-                        return Math.Sin(a);
-                    }
-                case "cos":
-                    {
-                        return Math.Cos(a);
-                    }
-                default: return 0;
-            }
+            _unaryOperators.TryGetValue(op, out var val);
+            return val.Item1.Invoke(a);
         }
 
         public bool IsUnaryOperator(string op)
         {
-            (int, CCType) val;
-            return unaryOperators.TryGetValue(op, out val);
+            return _unaryOperators.TryGetValue(op, out var val);
         }
 
         public bool IsBinaryOperator(string op)
         {
-            (int, CCType) val;
-            return binaryOperators.TryGetValue(op, out val);
+            return _binaryOperators.TryGetValue(op, out var val);
         }
 
         public int GetPrecedence(string op)
         {
-            (int, CCType) val;
-            binaryOperators.TryGetValue(op, out val);
-            return val.Item1;
+            _binaryOperators.TryGetValue(op, out var val);
+            return val.Item2;
         }
 
         public CCType GetType(string op)
         {
-            (int, CCType) val;
-            binaryOperators.TryGetValue(op, out val);
-            return val.Item2;
+            _binaryOperators.TryGetValue(op, out var val);
+            return val.Item3;
         }
     }
+    
 }

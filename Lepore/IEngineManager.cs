@@ -4,7 +4,7 @@ namespace OOP21_Calculator.Lepore
 {
     public interface IEngineManager
     {
-        Calculator? Mounted { get; set; }
+        Calculator Mounted { get; set; }
         void Calculate();
     }
 }

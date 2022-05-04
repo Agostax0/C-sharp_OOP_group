@@ -5,52 +5,42 @@ using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
 {
+    /// <summary>
+    /// Engine manager of the system.
+    /// It provides methods for selecting the calculator to use and to calculate the expression currently stored in the memory manager.
+    /// </summary>
     public class CCEngineManager : IEngineManager
     {
-        private readonly IMemoryManager memoryManager;
-        private readonly IEngineModel model;
+        private readonly IMemoryManager _memoryManager;
+        private readonly IEngineModel _model;
 
         public CCEngineManager(IMemoryManager memory)
         {
-            memoryManager = memory;
-            model = new CCEngineModel();
+            _memoryManager = memory;
+            _model = new CCEngineModel();
         }
 
-        public Calculator? Mounted { 
-            get => model.Mounted; 
-            set {
-                Logger.log("Mount", value.ToString());
-                model.Mounted = value.Value; 
-            }
+        public Calculator Mounted { 
+            get => _model.Mounted; 
+            set => _model.Mounted = value; 
         }
 
         public void Calculate()
         {
-            IList<string> input = memoryManager.State;
-            Logger.log("Calculating", input);
+            IList<string> input = _memoryManager.State;
 
-            IEngine engine = new CCEngine(GetController(Mounted.Value));
-            double result = engine.Calculate(input);
-            memoryManager.State = new List<string> { result.ToString(CultureInfo.CreateSpecificCulture("en-GB")) };
-        }
+            IEngine engine = new CCEngine(_model.GetController(Mounted));
 
-        private ICalculatorController GetController(Calculator c)
-        {
-            ICalculatorController controller = new StandardController();
-            switch(c)
+            try
             {
-                case Calculator.STANDARD:
-                    {
-                        controller = new StandardController();
-                        break;
-                    }
-                case Calculator.SCIENTIFIC:
-                    {
-                        controller = new ScientificController();
-                        break;
-                    }
+                double result = engine.Calculate(input);
+                _memoryManager.State = new List<string> { result.ToString(CultureInfo.CreateSpecificCulture("en-GB")) };
             }
-            return controller;
+            catch (Exception e)
+            {
+                _memoryManager.State = new List<string> { e.Message };
+            }
         }
+
     }
 }

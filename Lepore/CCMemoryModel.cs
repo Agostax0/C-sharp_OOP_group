@@ -4,25 +4,24 @@ using System.Text;
 
 namespace OOP21_Calculator.Lepore
 {
+    /// <summary>
+    /// Model for the Memory Manager.
+    /// It contains a reference to the input buffer.
+    /// </summary>
     public class CCMemoryModel : IMemoryModel
     {
-        public IList<string> State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private readonly IList<string> _buffer = new List<string>();
+        private readonly IList<string> _history = new List<string>();
 
-        public IList<string> History => throw new NotImplementedException();
+        public IList<string> State => _buffer;
 
-        public void AddInput(string s)
-        {
-            throw new NotImplementedException();
-        }
+        public IList<string> History => _history;
 
-        public void AddToHistory()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ClearBuffer()
-        {
-            throw new NotImplementedException();
-        }
+        public void AddInput(string s) => _buffer.Add(s);
+        
+        public void AddToHistory(string s) => _history.Add(s);
+        
+        public void ClearBuffer() => _buffer.Clear();
+        
     }
 }

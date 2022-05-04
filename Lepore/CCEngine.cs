@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using static OOP21_Calculator.Lepore.CCType;
-using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
 {
+    /// <summary>
+    /// Class that implements methods to parse and execute mathematical expressions.
+    /// </summary>
     public class CCEngine : IEngine
     {
-        private readonly ICalculatorController calc;
+        private readonly ICalculatorController _calc;
         private readonly IFormatProvider fp = CultureInfo.CreateSpecificCulture("en-GB");
+
         public CCEngine(ICalculatorController c)
         {
-            calc = c;
+            _calc = c;
         }
 
         public double Calculate(IList<string> input)
         {
             IList<string> rpnInput = ParseToRPN(UnifyTerms(input));
-            Logger.log("RPN", rpnInput);
             return EvaluateRPN(rpnInput);
         }
 
@@ -59,7 +62,7 @@ namespace OOP21_Calculator.Lepore
                     if (stack.Count > 0 && stack.Peek() == "(")
                         stack.Pop();
                     else
-                        throw new Exception("Parsing");
+                        throw new Exception("Parenthesis mismatch");
 
                     if (stack.Count > 0 && IsUnaryOperator(stack.Peek()))
                         output.Add(stack.Pop());
@@ -69,7 +72,7 @@ namespace OOP21_Calculator.Lepore
             while (stack.Count > 0)
             {
                 if (stack.Peek() == "(")
-                    throw new Exception("Parsing");
+                    throw new Exception("Parenthesis mismatch");
                 output.Add(stack.Pop());
             }
 
@@ -90,26 +93,25 @@ namespace OOP21_Calculator.Lepore
                 }
                 else if (IsBinaryOperator(token))
                 {
-                    if (stack.Count < 2) throw new Exception("Evaluation");
+                    if (stack.Count < 2) throw new Exception("Syntax error");
                     double secondOperand = stack.Pop();
                     double firstOperand = stack.Pop();
                     stack.Push(ApplyBinaryOperator(token, firstOperand, secondOperand));
                 }
                 else if (IsUnaryOperator(token))
                 {
-                    if (stack.Count == 0) throw new Exception("Evaluation");
+                    if (stack.Count == 0) throw new Exception("Syntax error");
                     double operand = stack.Pop();
                     stack.Push(ApplyUnaryOperator(token, operand));
                 }
             }
 
-            if (stack.Count != 1) throw new Exception("Evaluation");
+            if (stack.Count != 1) throw new Exception("Syntax error");
             return stack.Pop();
         }
 
         private IList<string> UnifyTerms(IList<string> input)
         {
-            Logger.log("Unify", input);
             IList<string> unified = new List<string>();
             IList<string> currentNumber = new List<string>();
 
@@ -136,63 +138,38 @@ namespace OOP21_Calculator.Lepore
                 unified.Add(actual.ToString(fp));
             }
 
-            Logger.log("Unified", unified);
-
             return unified;
         }
 
         private double Convert(IList<string> currentNumber)
         {
-            Logger.log("Convert", currentNumber);
-            //check number of dots
+            // Check number of dots
+            if (currentNumber.Where((s) => s == ".").Count() > 1)
+                throw new Exception("Syntax error");
+
             string num = "";
             foreach(string s in currentNumber)
             {
                 num += s;
             }
 
-            double value;
-            double.TryParse(num, NumberStyles.Any, fp, out value);
-            Logger.log("Converted", value.ToString(fp));
+            double.TryParse(num, NumberStyles.Any, fp, out double value);
             return value;
         }
 
-        private double ApplyUnaryOperator(string token, double operand)
-        {
-            return calc.ApplyUnaryOperator(token, operand);
-        }
+        private double ApplyUnaryOperator(string token, double operand) => _calc.ApplyUnaryOperator(token, operand);
 
-        private double ApplyBinaryOperator(string token, double firstOperand, double secondOperand)
-        {
-            return calc.ApplyBinaryOperator(token, firstOperand, secondOperand);
-        }
+        private double ApplyBinaryOperator(string token, double firstOperand, double secondOperand) => _calc.ApplyBinaryOperator(token, firstOperand, secondOperand);
 
-        private bool IsNumber(string s)
-        {
-            double parse;
-            return Double.TryParse(s, out parse);
-        }
-        private bool IsUnaryOperator (string s)
-        {
-            return calc.IsUnaryOperator(s);
-        }
+        private bool IsNumber(string s) => double.TryParse(s, out double parse);
+        private bool IsUnaryOperator(string s) => _calc.IsUnaryOperator(s);
 
-        private bool IsBinaryOperator(string s)
-        {
+        private bool IsBinaryOperator(string s) => _calc.IsBinaryOperator(s);
 
-            return calc.IsBinaryOperator(s);
-        }
+        private CCType Type(string s) => _calc.GetType(s);
 
-        private CCType Type(string s)
-        {
-            return calc.GetType(s);
-        }
+        private int Precedence(string s) => _calc.GetPrecedence(s);
 
-        private int Precedence(string s)
-        {
-            return calc.GetPrecedence(s);
-        }
-    
 
     }
 }

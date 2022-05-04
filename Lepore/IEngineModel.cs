@@ -12,6 +12,8 @@ namespace OOP21_Calculator.Lepore
         }
 
         Calculator Mounted { get; set; }
+
+        ICalculatorController GetController(Calculator calculator);
     }
 
     
