@@ -3,16 +3,15 @@ using OOP21_Calculator.Lepore;
 
 namespace OOP21_Calculator.Alni
 {
-    public interface  ICalculatorController
+    public interface ICalculatorController
     {
-        double ApplyBinaryOperation(String op, double a, double b);
-        int GetPrecedence(String op);
-        CCType GetType(String op);
-        double ApplyUnaryOperation(String op, double a);
-        bool IsUnaryOperator(String op);
-        bool IsBinaryOperator(String op);
-        void SetManager(IManager mng);
-        IManager GetManager();
+        IManager Manager { get; set; }
+        double ApplyBinaryOperation(string op, double a, double b);
+        int GetPrecedence(string op);
+        CCType GetType(string op);
+        double ApplyUnaryOperation(string op, double a);
+        bool IsUnaryOperator(string op);
+        bool IsBinaryOperator(string op);
     }
 }
 

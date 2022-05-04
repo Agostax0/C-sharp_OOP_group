@@ -8,16 +8,20 @@ namespace OOP21_Calculator.Alni
         private CombinatoricsCalculatorModelFactory() { }
         public static ICalculatorModel Create()
         {
-            Dictionary<string, CCBinaryOperator> binMap = new Dictionary<string, CCBinaryOperator>();
-            binMap.Add("factorial", CreateBinaryFunction((x, y) => FallingFactorial(x, y)));
-            binMap.Add("binomialCoefficient", CreateBinaryFunction((a, b) => BinomialCoefficient(a, b)));
-            binMap.Add("sequencesNumber", CreateBinaryFunction((n, m) => SequencesNumber(n, m)));
-            binMap.Add("binaryFibonacci", CreateBinaryFunction((n, k) => BinaryFibonacci(n, k)));
-            binMap.Add("stirlingNumber", CreateBinaryFunction((n, k) => StirlingNumber(n, k)));
-            Dictionary<string, CCUnaryOperator> unMap = new Dictionary<string, CCUnaryOperator>();
-            unMap.Add("fibonacci", CreateUnaryFunction((n) => Fibonacci(n)));
-            unMap.Add("derangement", CreateUnaryFunction((n) => Derangement(n)));
-            unMap.Add("bellNumber", CreateUnaryFunction((n) => BellNumber(n)));
+            Dictionary<string, CCBinaryOperator> binMap = new Dictionary<string, CCBinaryOperator>
+            {
+                { "factorial", CreateBinaryFunction((x, y) => FallingFactorial(x, y)) },
+                { "binomialCoefficient", CreateBinaryFunction((a, b) => BinomialCoefficient(a, b)) },
+                { "sequencesNumber", CreateBinaryFunction((n, m) => SequencesNumber(n, m)) },
+                { "binaryFibonacci", CreateBinaryFunction((n, k) => BinaryFibonacci(n, k)) },
+                { "stirlingNumber", CreateBinaryFunction((n, k) => StirlingNumber(n, k)) }
+            };
+            Dictionary<string, CCUnaryOperator> unMap = new Dictionary<string, CCUnaryOperator>
+            {
+                { "fibonacci", CreateUnaryFunction((n) => Fibonacci(n)) },
+                { "derangement", CreateUnaryFunction((n) => Derangement(n)) },
+                { "bellNumber", CreateUnaryFunction((n) => BellNumber(n)) }
+            };
             return new CalculatorModelTemplate(binMap, unMap);
         }
         private static double FallingFactorial(double n, double m)
