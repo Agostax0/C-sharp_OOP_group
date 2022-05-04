@@ -150,8 +150,38 @@ namespace OOP21_Calculator.Agosta
         ///</summary>
         public void Calculate()
         {
+            if (!this.buffer.Count != 0)
+            {
+                this.RemoveError();
+                var temp = this.FormatToDecimal(); 
+                this.controller.getManager().memory.readAll(temp);
+                this.controller.getManager().engine().calculate();
+                this.buffer.Clear();
+                if(this.controller.getManager().memory().getCurrentState().Exists((str) => str.Contains("-")){
+                    var res = this.buffer[0];//this.controller.getManager().memory().getCurrentState[0];
+                    for(int i = 0; i < res.Length; i++)
+                    {
+                        this.buffer.Add(res[i]);
+                    }
+                }
+                else
+                {
+                    //this.buffer.AddRange(this.controller.memory().getManager().getCurrentState());
+                }
+                this.InverseFormat();
+                this.lastNumBuffer = this.buffer.ToString();
+                this.controller.getManager().memory().clear();
+            }
+        }
+        private List<string> FormatToDecimal()
+        {
             throw new NotImplementedException();
         }
+        private List<string> InverseFormat()
+        {
+            throw new NotImplementedException();
+        }
+
         ///<summary> This method will update the display to show the current buffer </summary>
         public void UpdateDisplay()
         {
