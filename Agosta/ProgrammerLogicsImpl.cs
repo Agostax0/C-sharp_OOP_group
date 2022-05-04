@@ -4,6 +4,7 @@ using static OOP21_Calculator.Lepore.CCEngineManager;
 
 namespace OOP21_Calculator.Agosta
 {
+    ///<summary>Class<c>ProgrammerLogicsImpl</c> mediates between CalculatorController and ProgrammerPanel.</summary>
     internal class ProgrammerLogicsImpl : IInputFormatterLogics, IOutputFormatterLogics
     {
         private readonly List<string> _tokens;
@@ -35,7 +36,15 @@ namespace OOP21_Calculator.Agosta
                 this._tokens.Add(token.Key);
             }
         }
-
+        ///<summary> This method reads a string value to be added to the current buffer.
+        ///<example> For example:
+        ///<param name="input">the value to be read.</param>
+        ///<code>
+        ///     new ProgrammerLogicsImpl().Read("F");
+        ///</code>
+        /// the buffer will contain a single string "F".
+        ///</example>
+        ///</summary>
         public void Read(string input)
         {
             if ("not".Equals(input))
@@ -85,6 +94,15 @@ namespace OOP21_Calculator.Agosta
             });
             return ret;
         }
+        ///<summary> This method changes the current conversion base
+        ///     and clears the buffers.
+        ///<example> For example:
+        ///<code>
+        ///     new FormatterLogicsImpl().Reset(a);
+        ///</code>
+        /// where <c>a</c> can assume the following values: 2, 8, 10, 16;
+        ///</example>
+        ///</summary>
         public void Reset(int convBase)
         {
             this.conversionBase = convBase;
@@ -93,7 +111,16 @@ namespace OOP21_Calculator.Agosta
             this.lastNumBuffer = "";
         }
 
-
+        ///<summary> This method deletes the last input recieved.
+        ///<example> For example:
+        ///<code>
+        ///    var x = new FormatterLogicsImpl();
+        ///    x.Read("1");x.Read("0");
+        ///    x.DeleteLast();
+        ///</code>
+        ///    doing so will leave in the buffer only the value "1";
+        ///</example>
+        ///</summary>
         public void DeleteLast()
         {
             if("Syntax error".Equals(this.lastNumBuffer))
@@ -110,16 +137,27 @@ namespace OOP21_Calculator.Agosta
                 });
             }
         }
+        ///<summary> This method calculates the current buffer's contents 
+        ///     using the engine's calculate.
+        ///<example> For example:
+        ///<code>
+        ///     var x = new FormatterLogicsImpl();
+        ///     x.read("1");x.read("+");x.read("1");
+        ///     x.calculate();
+        ///</code>
+        /// doing this will leave in the buffer only the result of "1+1".
+        ///</example>
+        ///</summary>
         public void Calculate()
         {
             throw new NotImplementedException();
         }
-
+        ///<summary> This method will update the display to show the current buffer </summary>
         public void UpdateDisplay()
         {
             //this._display.updateText(this.GetBuffer());
         }
-
+        ///<summary> This method will update the upper display to show the last operation executed </summary>
         public void UpdateDisplayUpperText()
         {
             if (this.GetBuffer().Length != 0)
@@ -127,8 +165,13 @@ namespace OOP21_Calculator.Agosta
                 //_display.updateUpperText(this.GetBuffer() + " =");
             }
         }
+        ///<summary>
+        ///<returns> the current buffer converted to string.</returns>
+        ///</summary>
         public string Format() => this.GetBuffer();
-
+        ///<summary> This methods add to the History the
+        /// last valid executed operation, if already added.
+        ///</summary>
         public void AddResult(string before)
         {
             IOutputFormatterLogics outputFormatterLogics = this;
