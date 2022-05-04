@@ -38,7 +38,7 @@ namespace OOP21_Calculator.Agosta
         }
         ///<summary> This method reads a string value to be added to the current buffer.
         ///<example> For example:
-        ///<param name="input">the value to be read.</param>
+        ///<paramref name="input">the value to be read.</paramref>
         ///<code>
         ///     new ProgrammerLogicsImpl().Read("F");
         ///</code>
