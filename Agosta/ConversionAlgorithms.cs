@@ -5,7 +5,12 @@ namespace OOP21_Calculator.Agosta
 {
     static class ConversionAlgorithms
     {
-
+        ///<summary> Converts the value to the specified base.  
+        /// (<paramref name="value"/>,<paramref name="convBase"/>)
+        ///</summary>
+        /// <param name="value">the value to be converted.</param>
+        /// <param name="convBase">the base to convert the value.</param>
+        /// <remarks> the converted value is represented using the "+" or "-" followed by the absolute value.</remarks>
         public static string ToBase(long value, int convBase)
         {
             if (convBase == 16)
@@ -43,6 +48,11 @@ namespace OOP21_Calculator.Agosta
                     return Convert.ToInt64(bit);
             }
         }
+        ///<summary> Converts the value to the decimal base.  
+        /// (<paramref name="value"/>,<paramref name="convBase"/>)
+        ///</summary>
+        /// <param name="value">the value to be converted.</param>
+        /// <param name="convBase">the conversion base of the value.</param>
         public static long ToUnsignedDecimal(string value, int convBase)
         {
             long ret = 0;
@@ -52,6 +62,12 @@ namespace OOP21_Calculator.Agosta
             }
             return ret;
         }
+        ///<summary> Converts the value to the decimal base.  
+        /// (<paramref name="value"/>,<paramref name="convBase"/>)
+        ///</summary>
+        /// <param name="value">the value to be converted.</param>
+        /// <param name="convBase">the conversion base of the value.</param>
+        /// <remarks> This method doesn't care of the value's sign. </remarks>
         public static long ToSignedDecimal(string value, int convBase)
         {
             long ret = 0;
