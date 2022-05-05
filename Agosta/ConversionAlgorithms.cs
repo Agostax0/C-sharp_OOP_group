@@ -5,11 +5,11 @@ namespace OOP21_Calculator.Agosta
 {
     static class ConversionAlgorithms
     {
-        ///<summary> Converts the value to the specified base.  
-        /// (<paramref name="value"/>,<paramref name="convBase"/>)
-        ///</summary>
+        ///<summary> Converts the value to the specified base.
+        ///
         /// <param name="value">the value to be converted.</param>
         /// <param name="convBase">the base to convert the value.</param>
+        /// </summary>
         /// <remarks> the converted value is represented using the "+" or "-" followed by the absolute value.</remarks>
         public static string ToBase(long value, int convBase)
         {
@@ -48,9 +48,9 @@ namespace OOP21_Calculator.Agosta
                     return Convert.ToInt64(bit);
             }
         }
-        ///<summary> Converts the value to the decimal base.  
+        /// <summary> Converts the value to the decimal base.  
         /// (<paramref name="value"/>,<paramref name="convBase"/>)
-        ///</summary>
+        /// </summary>
         /// <param name="value">the value to be converted.</param>
         /// <param name="convBase">the conversion base of the value.</param>
         public static long ToUnsignedDecimal(string value, int convBase)

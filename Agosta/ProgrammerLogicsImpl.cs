@@ -38,7 +38,6 @@ namespace OOP21_Calculator.Agosta
         }
         ///<summary> This method reads a string value to be added to the current buffer.
         ///<example> For example:
-        ///<paramref name="input">the value to be read.</paramref>
         ///<code>
         ///     new ProgrammerLogicsImpl().Read("F");
         ///</code>
@@ -200,7 +199,7 @@ namespace OOP21_Calculator.Agosta
         ///</summary>
         public string Format() => this.GetBuffer();
         ///<summary> This methods add to the History the
-        /// last valid executed operation, if already added.
+        /// last valid executed operation, if not already added.
         ///</summary>
         public void AddResult(string before)
         {
