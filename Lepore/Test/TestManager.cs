@@ -160,5 +160,6 @@ namespace OOP21_Calculator.Lepore.Test
             Assert.AreEqual("Parenthesis mismatch", mng.Memory.State[0]);
             mng.Memory.Clear();
         }
+
     }
 }

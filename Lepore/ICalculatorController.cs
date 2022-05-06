@@ -6,17 +6,17 @@
     /// </summary>
     public interface ICalculatorController
     {
-        public double ApplyBinaryOperator(string op, double a, double b);
+        double ApplyBinaryOperator(string op, double a, double b);
 
-        public double ApplyUnaryOperator(string op, double a);
+        double ApplyUnaryOperator(string op, double a);
 
-        public bool IsUnaryOperator(string op);
+        bool IsUnaryOperator(string op);
 
-        public bool IsBinaryOperator(string op);
+        bool IsBinaryOperator(string op);
 
-        public int GetPrecedence(string op);
+        int GetPrecedence(string op);
 
-        public CCType GetType(string op);
+        CCType GetType(string op);
     }
     
 }

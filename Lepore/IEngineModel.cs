@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OOP21_Calculator.Lepore
+﻿namespace OOP21_Calculator.Lepore
 {
     public interface IEngineModel
     {
@@ -15,6 +11,4 @@ namespace OOP21_Calculator.Lepore
 
         ICalculatorController GetController(Calculator calculator);
     }
-
-    
 }

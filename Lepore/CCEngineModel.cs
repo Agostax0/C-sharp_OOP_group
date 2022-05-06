@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
