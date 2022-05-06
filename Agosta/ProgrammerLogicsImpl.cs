@@ -1,6 +1,7 @@
-﻿using System;
+﻿using OOP21_Calculator.Lepore;
+using System;
 using System.Collections.Generic;
-using static OOP21_Calculator.Lepore.CCEngineManager;
+using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Agosta
 {
@@ -10,7 +11,7 @@ namespace OOP21_Calculator.Agosta
         private readonly List<string> _tokens;
         private readonly List<string> buffer;
         private string lastNumBuffer;
-        //private readonly CalculatorController _controller;
+        private readonly ICalculatorController _controller;
         //private readonly CCDisplay _display;
         private int conversionBase = 10;
         public ProgrammerLogicsImpl(/*CCDisplay display*/)
@@ -149,18 +150,18 @@ namespace OOP21_Calculator.Agosta
         ///</summary>
         public void Calculate()
         {
-            if (!this.buffer.Count != 0)
+            if (this.buffer.Count != 0)
             {
                 this.RemoveError();
                 var temp = this.FormatToDecimal(); 
-                this.controller.getManager().memory.readAll(temp);
-                this.controller.getManager().engine().calculate();
-                this.buffer.Clear();
-                if(this.controller.getManager().memory().getCurrentState().Exists((str) => str.Contains("-")){
+                //this.controller.getManager().memory.readAll(temp);
+                //this.controller.getManager().engine().calculate();
+                //this.buffer.Clear();
+                if(/*this.controller.getManager().memory().getCurrentState().Exists((str) => str.Contains("-"))*/true){
                     var res = this.buffer[0];//this.controller.getManager().memory().getCurrentState[0];
                     for(int i = 0; i < res.Length; i++)
                     {
-                        this.buffer.Add(res[i]);
+                        this.buffer.Add(char.ToString(res[i]));
                     }
                 }
                 else
@@ -169,7 +170,7 @@ namespace OOP21_Calculator.Agosta
                 }
                 this.InverseFormat();
                 this.lastNumBuffer = this.buffer.ToString();
-                this.controller.getManager().memory().clear();
+               // this.controller.getManager().memory().clear();
             }
         }
         private List<string> FormatToDecimal()
