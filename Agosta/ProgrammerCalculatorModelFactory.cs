@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 namespace OOP21_Calculator.Agosta
 {
+    ///<summary>This Class returns a CalculatorModelTemplate containing a dictionary of
+    ///     the following bitwise operators:
+    ///     - and, or, xor, nand, nor, shiftL, shiftR, roR, roL, not.
+    ///</summary>
+
+    //TODO <listheader> documentation
     static class ProgrammerCalculatorModelFactory
     {
         public static ICalculatorModel Create()

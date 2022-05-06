@@ -59,5 +59,13 @@ namespace OOP21_Calculator.Alni.Test
             Assert.AreEqual(1, op.apply(300, 1), 0);
             Assert.AreEqual(7_770, op.apply(9, 4), 0);
         }
+        [Test]
+        public void ControllerTest()
+        {
+            ICalculatorController controller = new CalculatorControllerTemplate(CombinatoricsCalculatorModelFactory.Create());
+            Assert.IsTrue(controller.IsBinaryOperator("stirlingNumber"));
+            Assert.AreEqual(52.0, controller.ApplyUnaryOperation("bellNumber", 5));
+            Assert.AreEqual(0, controller.GetPrecedence("factorial"));
+        }
     }
 }

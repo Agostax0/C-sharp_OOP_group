@@ -6,6 +6,11 @@ namespace OOP21_Calculator.Agosta
 {
     static class StandardCalculatorModelFactory
     {
+        ///<summary>This Class returns a CalculatorModelTemplate containing a dictionary of
+        ///     the following standard operators:
+        ///     - sum, sub, mult, div, root, square, inverse.
+        ///</summary>
+        //TODO <listheader> documentation
         public static ICalculatorModel Create()
         {
             Dictionary<string, CCBinaryOperator> binaryOperators = new Dictionary<string, CCBinaryOperator>();
