@@ -147,11 +147,7 @@ namespace OOP21_Calculator.Lepore
             if (currentNumber.Where((s) => s == ".").Count() > 1)
                 throw new Exception("Syntax error");
 
-            string num = "";
-            foreach(string s in currentNumber)
-            {
-                num += s;
-            }
+            string num = string.Join("", currentNumber);
 
             double.TryParse(num, NumberStyles.Any, fp, out double value);
             return value;

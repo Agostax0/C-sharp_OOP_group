@@ -11,6 +11,9 @@ namespace OOP21_Calculator.Lepore
         void ReadAll(IList<string> list);
         void Clear();
         void AddResult(string s);
-        
+
+        public void DeleteLast();
+
+
     }
 }

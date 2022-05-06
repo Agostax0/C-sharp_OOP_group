@@ -10,10 +10,6 @@ namespace OOP21_Calculator.Lepore
     {
         private readonly IMemoryModel _model = new CCMemoryModel();
 
-        public CCMemoryManager()
-        {
-        }
-
         public IList<string> State { get => _model.State; set { _model.ClearBuffer(); ReadAll(value); } }
 
         public IList<string> History => _model.History;
@@ -34,6 +30,14 @@ namespace OOP21_Calculator.Lepore
         public void Clear() => _model.ClearBuffer();
 
         public void AddResult(string s) => _model.AddToHistory(s);
+
+        public void DeleteLast()
+        {
+            var curr = State;
+            curr.RemoveAt(curr.Count - 1);
+            Clear();
+            ReadAll(curr);
+        }
         
     }
 }
