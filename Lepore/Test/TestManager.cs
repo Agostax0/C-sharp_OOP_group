@@ -151,6 +151,7 @@ namespace OOP21_Calculator.Lepore.Test
             mng.Memory.DeleteLast();
             Assert.AreEqual("12", ListToString(mng.Memory.State));
 
+            // check deep copy
             mng.Memory.State.RemoveAt(mng.Memory.State.Count - 1);
             Assert.AreEqual("12", ListToString(mng.Memory.State));
         }
