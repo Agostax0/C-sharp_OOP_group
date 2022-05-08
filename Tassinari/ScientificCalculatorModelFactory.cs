@@ -39,7 +39,7 @@ namespace OOP21_Calculator.Tassinari
                 double result = x;
                 for (int i = x - 1; i > 0; i--)
                 {
-                    result = result * i;
+                    result *= i;
                 }
                 return result;
             }

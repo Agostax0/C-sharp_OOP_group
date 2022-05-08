@@ -7,7 +7,7 @@ namespace OOP21_Calculator.Tassinari
 {
     public class InputFormatterLogicsImpl : IInputFormatterLogics
     {
-        private ICalculatorController controller;
+        private readonly ICalculatorController controller;
 
         public InputFormatterLogicsImpl(ICalculatorController contr)
         {
@@ -18,9 +18,8 @@ namespace OOP21_Calculator.Tassinari
             controller.Manager.Engine.Calculate();
         }
         public void DeleteLast()
-        {
-            //not implemented
-            //controller.Manager.Memory.DeleteLast();
+        {           
+            controller.Manager.Memory.DeleteLast();
         }
         public void Read(string input)
         {
@@ -39,9 +38,9 @@ namespace OOP21_Calculator.Tassinari
             {
                 controller.Manager.Memory.Read(input);
             }
-            this.checkParenthesis();
+            this.CheckParenthesis();
         }
-        private void checkParenthesis()
+        private void CheckParenthesis()
         {
             List<String> state = new List<String>(controller.Manager.Memory.State);
             for (int i = 0; i < state.Count; i++)
