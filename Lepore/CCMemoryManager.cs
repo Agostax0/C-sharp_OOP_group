@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OOP21_Calculator.Lepore
 {
@@ -10,10 +9,6 @@ namespace OOP21_Calculator.Lepore
     public class CCMemoryManager : IMemoryManager
     {
         private readonly IMemoryModel _model = new CCMemoryModel();
-
-        public CCMemoryManager()
-        {
-        }
 
         public IList<string> State { get => _model.State; set { _model.ClearBuffer(); ReadAll(value); } }
 
@@ -35,6 +30,14 @@ namespace OOP21_Calculator.Lepore
         public void Clear() => _model.ClearBuffer();
 
         public void AddResult(string s) => _model.AddToHistory(s);
+
+        public void DeleteLast()
+        {
+            var curr = State;
+            curr.RemoveAt(curr.Count - 1);
+            Clear();
+            ReadAll(curr);
+        }
         
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OOP21_Calculator.Lepore
 {
@@ -12,6 +11,9 @@ namespace OOP21_Calculator.Lepore
         void ReadAll(IList<string> list);
         void Clear();
         void AddResult(string s);
-        
+
+        public void DeleteLast();
+
+
     }
 }

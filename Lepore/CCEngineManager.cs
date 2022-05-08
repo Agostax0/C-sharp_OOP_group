@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using static OOP21_Calculator.Lepore.IEngineModel;
 
 namespace OOP21_Calculator.Lepore
@@ -34,7 +35,15 @@ namespace OOP21_Calculator.Lepore
             try
             {
                 double result = engine.Calculate(input);
-                _memoryManager.State = new List<string> { result.ToString(CultureInfo.CreateSpecificCulture("en-GB")) };
+                string str = result.ToString(CultureInfo.CreateSpecificCulture("en-GB"));
+
+                if (result < 0)
+                    _memoryManager.State = new List<string> { str };
+                else 
+                {
+                    _memoryManager.Clear();
+                    _memoryManager.ReadAll(str.Select(c => c.ToString()).ToList());
+                }
             }
             catch (Exception e)
             {
