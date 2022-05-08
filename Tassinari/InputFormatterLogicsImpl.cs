@@ -8,7 +8,6 @@ namespace OOP21_Calculator.Tassinari
     public class InputFormatterLogicsImpl : IInputFormatterLogics
     {
         private readonly ICalculatorController controller;
-
         public InputFormatterLogicsImpl(ICalculatorController contr)
         {
             this.controller = contr;
@@ -91,7 +90,7 @@ namespace OOP21_Calculator.Tassinari
         {
             List<String> state = new List<String>(controller.Manager.Memory.State);
             if (state.Count == 0)
-            { //se lo state è vuoto allora devo ritornare che prima non c'è un numero
+            {
                 return false;
             }
             if (".".Equals(state[i]) || ")".Equals(state[i]))

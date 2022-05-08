@@ -17,7 +17,8 @@ namespace OOP21_Calculator.Tassinari
         }
         public void AddResult(string input)
         {
-            if (this.CheckForError(input))
+            IOutputFormatterLogics temp = this;
+            if (temp.CheckForError(input))
             {
                 this.controller.Manager.Memory.AddResult((string)input.Concat(" = ").Concat(this.Format()));
             }
@@ -31,16 +32,16 @@ namespace OOP21_Calculator.Tassinari
 
         public void UpdateDisplay()
         {
-            
+            throw new NotImplementedException();
         }
 
         public void UpdateDisplayUpperText()
         {
-            
+            throw new NotImplementedException();
         }
         private void SetAppearanceMap()
         {
-            ScientificCalculatorModelFactory.Create().UnaryOp.forEach((str, op) => {
+            ScientificCalculatorModelFactory.Create().UnaryOps.forEach((str, op) => {
                 switch (str)
                 {
                     case "x²":
@@ -81,7 +82,7 @@ namespace OOP21_Calculator.Tassinari
                     return appearanceMap.get(str);
                 }
                 return str;
-            }).collect(Collectors toList());
+            }).collect(Collectors.toList());
         }
         private String getStringOf(List<String> input)
         {
