@@ -21,13 +21,19 @@ namespace OOP21_Calculator.Tassinari
 
         public void Calculate(string eq)
         {
-            string temp = eq;
+            List<string> temp = eq.Split(',').ToList();
             this.results.Clear();
             double x = -RANGE;
             while (x <= RANGE)
             {
-                temp.Replace('x', (char) x);
-                this.controller.Manager.Memory.Read(temp);
+                int index;
+                index = temp.FindIndex(e => e =="x");
+                while(index != -1)
+                {
+                    temp[index] = x.ToString();
+                    index = temp.FindIndex(e => e == "x");
+                }
+                this.controller.Manager.Memory.Read(temp.Aggregate((x, y) => x + "" + y));
                 this.controller.Manager.Engine.Calculate();
                 try
                 {

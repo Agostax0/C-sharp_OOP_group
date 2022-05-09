@@ -78,7 +78,7 @@ namespace OOP21_Calculator.Tassinari
         private List<String> ReplaceOp()
         {
             List<String> state = new List<String>(controller.Manager.Memory.State);
-            return state.Select(String (str) => {
+            return state.Select((str) => {
                 if (this.controller.IsBinaryOperator(str) || this.controller.IsUnaryOperator(str))
                 {
                     appearanceMap.TryGetValue(str, out string value);
