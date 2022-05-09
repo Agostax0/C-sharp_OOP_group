@@ -8,6 +8,11 @@ namespace OOP21_Calculator.Tassinari
 {
     public class ScientificCalculatorModelFactory
     {
+        ///<summary>This Class returns a CalculatorModelTemplate containing a dictionary of
+        ///     the following operators:
+        ///     - root, ^, log, ln, abs, factorial, sin, cos, tan, csc, sec, cot.
+        ///     + all the operators from StandardCalculatorModelFactory
+        ///</summary>
         private ScientificCalculatorModelFactory() { }
         public static ICalculatorModel Create()
         {

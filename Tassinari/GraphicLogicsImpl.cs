@@ -21,7 +21,7 @@ namespace OOP21_Calculator.Tassinari
 
         public void Calculate(string eq)
         {
-            List<string> temp = eq.Split(',').ToList();
+            List<string> temp = eq.Split().ToList();
             this.results.Clear();
             double x = -RANGE;
             while (x <= RANGE)
