@@ -9,6 +9,7 @@ namespace OOP21_Calculator.Tassinari.Test
         [Test]
         public void UnaryScientificCalculatorTest()
         {
+            //test for the unary operators of scientific calculator only
             var log = ScientificCalculatorModelFactory.Create().UnaryOps.GetValueOrDefault("log");
             Assert.AreEqual(1, log.apply(10));
             Assert.AreEqual(2, log.apply(100));
@@ -47,6 +48,7 @@ namespace OOP21_Calculator.Tassinari.Test
         [Test]
         public void BinaryScientificCalculatorTest()
         {
+            //test for the binary operators of scientific calculator only
             var root = ScientificCalculatorModelFactory.Create().BinaryOps.GetValueOrDefault("root");
             Assert.AreEqual(2, root.apply(4, 2));
             Assert.AreEqual(10, root.apply(100, 2));
@@ -56,6 +58,7 @@ namespace OOP21_Calculator.Tassinari.Test
             Assert.AreEqual(25, pot.apply(5, 2));
         }
         [Test]
+        //test the correct substituion and calculation of values given f(x) = x
         public void GraphicCalculatorLogicsTest()
         {
             IGraphicLogics logics = new GraphicLogicsImpl();
