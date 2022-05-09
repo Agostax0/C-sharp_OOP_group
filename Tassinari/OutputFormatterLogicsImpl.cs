@@ -41,52 +41,55 @@ namespace OOP21_Calculator.Tassinari
         }
         private void SetAppearanceMap()
         {
-            ScientificCalculatorModelFactory.Create().UnaryOps.forEach((str, op) => {
+            foreach((string str, var op) in ScientificCalculatorModelFactory.Create().UnaryOps)
+            {
                 switch (str)
                 {
                     case "x²":
-                        appearanceMap.put(str, "²");
+                        appearanceMap.Add(str, "²");
                         break;
                     case "1/x":
-                        appearanceMap.put(str, "1/");
+                        appearanceMap.Add(str, "1/");
                         break;
                     case "factorial":
-                        appearanceMap.put(str, "!");
+                        appearanceMap.Add(str, "!");
                         break;
                     case "log":
-                        appearanceMap.put(str, "log₁₀");
+                        appearanceMap.Add(str, "log₁₀");
                         break;
                     default:
-                        appearanceMap.put(str, str);
+                        appearanceMap.Add(str, str);
                         break;
                 }
-            });
-            ScientificCalculatorModelFactory.Create().BinaryOps.forEach((str, op) => {
+            }
+            foreach ((string str, var op) in ScientificCalculatorModelFactory.Create().BinaryOps)
+            {
                 switch (str)
                 {
                     case "root":
-                        appearanceMap.put(str, "√");
+                        appearanceMap.Add(str, "√");
                         break;
                     default:
-                        appearanceMap.put(str, str);
+                        appearanceMap.Add(str, str);
                         break;
                 }
-            });
+            }
         }
         private List<String> ReplaceOp()
         {
             List<String> state = new List<String>(controller.Manager.Memory.State);
-            return state.stream().map((str) => {
-                if (this.controller.isBinaryOperator(str) || this.controller.isUnaryOperator(str))
+            return state.Select(String (str) => {
+                if (this.controller.IsBinaryOperator(str) || this.controller.IsUnaryOperator(str))
                 {
-                    return appearanceMap.get(str);
+                    appearanceMap.TryGetValue(str, out string value);
+                    return value;
                 }
                 return str;
-            }).collect(Collectors.toList());
+            }).ToList();
         }
         private String getStringOf(List<String> input)
         {
-            return input.stream().reduce("", (a, b) => a + b);
+            return String.Join("", input);
         }
     }
 }

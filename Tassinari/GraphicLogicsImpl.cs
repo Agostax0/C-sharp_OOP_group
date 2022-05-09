@@ -21,15 +21,13 @@ namespace OOP21_Calculator.Tassinari
 
         public void Calculate(string eq)
         {
+            string temp = eq;
             this.results.Clear();
             double x = -RANGE;
             while (x <= RANGE)
             {
-
-                foreach (var s in eq.ToCharArray())
-                {
-                    this.controller.Manager.Memory.Read(eq);
-                }
+                temp.Replace('x', (char) x);
+                this.controller.Manager.Memory.Read(temp);
                 this.controller.Manager.Engine.Calculate();
                 try
                 {
